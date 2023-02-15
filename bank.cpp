@@ -8,19 +8,27 @@
 #include "Bank.h"
 
 using namespace std;
+/*
+ * Maybe don't import all of the std namespace
+ * try using "using std::cout;" and "std::cin;" in future
+ * Maybe I'll go through and clean that up later
+ */
 
 void menu()
 {
     Account account;
-    cout << "<<<<<\tBanking System\t>>>>>" << endl;
-    cout << "<<<\tMain menu\t>>>" << endl;
-    int choice;
 
-    cout << "1 - Create an account" << endl;
-    cout << "2 - Login to an account" << endl;
-    cout << "3 - Show all accounts" << endl;
-    cout << "4 - Search account by ID" << endl;
-    cout << "5 - Delete account" << endl;
+    int choice; // I'd suggest putting variable declarations at the top
+                // makes finding all variables used in a project much easier to find
+
+    cout << "<<<<<\tBanking System\t>>>>>\n";
+    cout << "<<<\tMain menu\t>>>\n";
+
+    cout << "1 - Create an account\n";
+    cout << "2 - Login to an account\n";
+    cout << "3 - Show all accounts\n";
+    cout << "4 - Search account by ID\n";
+    cout << "5 - Delete account\n";
     cout << "Choose a number: ";
     cin >> choice;
    
@@ -42,7 +50,7 @@ void menu()
          account_deletion();
          break;
      default:
-         cout << "Invalid choice..." << endl;
+         cout << "Invalid choice...\n";
          break;
      }
 }
@@ -65,7 +73,7 @@ void account_create()
    person.id = dist6(rng);
    cout << "ID: " << person.id << endl;
 
-   cin.ignore(1);
+   cin.ignore(1); // 
    cout << "Name: ";
    cin.getline(person.name,100);
 
@@ -89,7 +97,7 @@ void account_view_all()
    ifstream fp("Accounts.dat");
    while (fp.read((char *)&person,sizeof(person)))
    {
-      cout << "*******************************************" << endl;
+      cout << "*******************************************\n";
       cout << "Account's ID: " << person.id << endl
       << "Account's name: " << person.name << endl
       << "Account's balance: $" << person.balance << endl
@@ -211,7 +219,7 @@ void account_update(int id,long double balance)
    tmp.close();
 
    int status = remove("Accounts.dat");
-   if(status == 0) cout<<"\nFile Deleted Successfully!" << endl;
+   if(status == 0) cout<<"\nFile Deleted Successfully!\n";
    else cout<<"\nError Occurred!";
 
    if (rename("tmp.dat", "Accounts.dat") != 0) perror("Error renaming file\n");
